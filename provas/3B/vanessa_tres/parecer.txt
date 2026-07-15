@@ -1,0 +1,18 @@
+Vanessa concluiu poucas funcionalidades no nível esperado dentro do tempo de prova. No banco, estruturou 3 tabela(s) (produto, entrada, saida) com PKs e FKs definidas. No backend, implementou 4 rota(s) (GET, POST) e 0 função(ões) nomeada(s).
+
+QUADRO DE NÍVEIS:
+  A01 Script / população do banco de dados: nível 3/4
+  A02 View vw_estoque: não entregue
+  A03 Diagrama Entidade-Relacionamento (DER): não entregue
+  A04 Listagem de valor total via view: não entregue
+  A05 Listagem de todos os produtos: nível 2/4
+  A06 Cadastro de novo produto: nível 3/4
+  A07 Listagem de saídas (ordem decrescente por data): nível 3/4
+  A08 Entrada de itens no estoque: nível 1/4
+  A09 Relatório de entradas/saídas por período: não entregue
+  A10 Produtos com maior volume de saída: não entregue
+  A11 Produtos nos limites mín/máx de estoque: não entregue
+
+📝 OBSERVAÇÕES (nota já atribuída):
+  A05: A listagem de produtos é realizada com sucesso, porém com falhas de validação, tratamento de erros ou padronização, e não atende a todos os campos previstos.
+  A07: A listagem de saídas está em ordem decrescente por data e retorna no mínimo 4 campos, mas a data não segue o formato 25-12-2025.

@@ -1,0 +1,31 @@
+Giulia concluiu poucas funcionalidades no nível esperado dentro do tempo de prova. No banco, estruturou 2 tabela(s) (produto, estoque) com PKs e FKs definidas; criou view (vw_estoque). No backend, implementou 5 rota(s) (GET, POST, PUT) e 0 função(ões) nomeada(s).
+
+QUADRO DE NÍVEIS:
+  A01 Script / população do banco de dados: nível 1/4
+  A02 View vw_estoque: nível 1/4
+  A03 Diagrama Entidade-Relacionamento (DER): nível 2/4 ⚠ revisar
+  A04 Listagem de valor total via view: não entregue
+  A05 Listagem de todos os produtos: nível 2/4
+  A06 Cadastro de novo produto: nível 2/4
+  A07 Listagem de saídas (ordem decrescente por data): não entregue
+  A08 Entrada de itens no estoque: nível 1/4
+  A09 Relatório de entradas/saídas por período: não entregue
+  A10 Produtos com maior volume de saída: não entregue
+  A11 Produtos nos limites mín/máx de estoque: não entregue
+
+🐞 BUGS QUE IMPEDEM A EXECUÇÃO:
+  A01: Erro de sintaxe na VIEW vw_estoque
+  A01: JOIN e WHERE inválidos na VIEW vw_estoque
+  A02: Erro de sintaxe na criação da view vw_estoque: JOIN produto.quantidade ON produto.nome_id = quantidade.id * valor_unitario.id
+  A02: A tabela quantidade não existe no banco de dados
+  A05: Erro de sintaxe na criação da view vw_estoque
+  A08: A view vw_estoque está com erro de sintaxe
+  A08: A rota PUT /produto/:id não atualiza o estoque
+
+⚠ REVISÃO HUMANA RECOMENDADA:
+  A03: Elementos identificados: entidades, atributos, identificador com auto-incremento, chave primária.
+
+📝 OBSERVAÇÕES (nota já atribuída):
+  A05: O aluno listou todos os produtos com os campos principais (nome, quantidade e valor unitário), mas não atendeu a todos os requisitos do nível 3, como incluir a unidade de medida, que não é um campo do cadastro no enunciado, e também não validou os dados.
+  A06: O cadastro de produto foi implementado, porém sem validações de campos e tratamento de erros.
+  A08: A função de entrada de itens no estoque apresenta erros de lógica e estrutura que impedem o registro da entrada, como a falta de uma rota PUT /produto/:id que atualize corretamente o saldo e a data de entrada.

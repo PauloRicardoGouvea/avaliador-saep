@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliador SAEP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="container">
+        <header style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1>Avaliador <span class="gradient-text">SAEP</span></h1>
+                <p>Envie os arquivos do aluno para correção automática generosa.</p>
+            </div>
+            <div class="header-actions" style="display: flex; gap: 0.5rem;">
+                <button id="importBackupBtn" class="secondary-btn" style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-top: 0;">📥 Importar</button>
+                <button id="exportBackupBtn" class="primary-btn" style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-top: 0;">📤 Exportar</button>
+                <input type="file" id="backupFileInput" accept=".zip" style="display: none;">
+            </div>
+        </header>
+
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-tab="avaliar">📝 Nova Avaliação</button>
+            <button class="tab-btn" data-tab="historico">👥 Histórico de Alunos</button>
+        </nav>
+
+        <div id="tab-avaliar" class="tab-content active">
+            <form id="evaluationForm" class="glass-panel">
+                <div class="form-group row">
+                    <div class="input-field">
+                        <label for="nome">Nome do Aluno</label>
+                        <input type="text" id="nome" name="nome" placeholder="Ex: João Silva" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="turma">Turma</label>
+                        <input type="text" id="turma" name="turma" placeholder="Ex: 3B" required>
+                    </div>
+                </div>
+
+                <div class="upload-grid">
+                    <div class="upload-zone" id="zone-sql">
+                        <label for="sqlFile">
+                            <div class="icon">💾</div>
+                            <span class="title">Banco de Dados (.sql)</span>
+                            <span class="filename" id="name-sql">Nenhum arquivo selecionado</span>
+                        </label>
+                        <input type="file" id="sqlFile" name="sqlFile" accept=".sql">
+                    </div>
+
+                    <div class="upload-zone" id="zone-js">
+                        <label for="jsFile">
+                            <div class="icon">💻</div>
+                            <span class="title">Backend (.js)</span>
+                            <span class="filename" id="name-js">Nenhum arquivo selecionado</span>
+                        </label>
+                        <input type="file" id="jsFile" name="jsFile" accept=".js">
+                    </div>
+
+                    <div class="upload-zone" id="zone-der">
+                        <label for="derFile">
+                            <div class="icon">🗺️</div>
+                            <span class="title">Modelo DER (png/jpg/pdf)</span>
+                            <span class="filename" id="name-der">Nenhum arquivo selecionado</span>
+                        </label>
+                        <input type="file" id="derFile" name="derFile" accept=".png,.jpg,.jpeg,.pdf,.drawio">
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn">
+                    <span class="btn-text">Avaliar Projeto</span>
+                    <div class="spinner hidden"></div>
+                </button>
+            </form>
+
+            <section id="resultsSection" class="glass-panel hidden">
+                <h2>Resultado da Avaliação</h2>
+                <div class="student-info">
+                    <span id="res-nome" class="badge"></span>
+                    <span id="res-turma" class="badge outlined"></span>
+                </div>
+                
+                <div class="score-card">
+                    <div class="score-circle">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg"
+                            d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <path class="circle" id="score-path"
+                            stroke-dasharray="0, 100"
+                            d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <text x="18" y="20.35" class="percentage" id="score-text">0%</text>
+                        </svg>
+                    </div>
+                    <div class="score-stats">
+                        <div class="stat"><span class="icon">🕐</span> <span id="res-tempo"></span> estouro</div>
+                        <div class="stat"><span class="icon">⚠️</span> <span id="res-ambiguo"></span> ambiguidades</div>
+                    </div>
+                </div>
+
+                <div class="parecer-box">
+                    <h3>Parecer Técnico</h3>
+                    <pre id="res-parecer"></pre>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button id="resetBtn" class="secondary-btn" style="margin-top: 0;">Nova Avaliação</button>
+                    <button id="downloadBtn" style="margin-top: 0;">Baixar JSON</button>
+                </div>
+            </section>
+        </div>
+
+        <div id="tab-historico" class="tab-content">
+            <div class="glass-panel">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="🔍 Buscar aluno pelo nome...">
+                </div>
+
+                <div class="turma-filter">
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-filter="3B">Turma 3B</button>
+                    <button class="filter-btn" data-filter="3C">Turma 3C</button>
+                </div>
+
+                <div id="studentsContainer">
+                    <div class="loading-students">
+                        <div class="spinner"></div>
+                        <p>Carregando alunos...</p>
+                    </div>
+                </div>
+
+                <div id="emptyState" class="empty-state hidden">
+                    <div class="empty-icon">📭</div>
+                    <p>Nenhum aluno encontrado.</p>
+                    <span>Avalie um aluno na aba "Nova Avaliação" para vê-lo aqui.</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+Kaio concluiu poucas funcionalidades no nível esperado dentro do tempo de prova. No banco, estruturou 2 tabela(s) (ESTOQUE, PEDIDO) com PKs e FKs definidas. No backend, implementou 5 rota(s) (POST, GET, PUT, DELETE) e 0 função(ões) nomeada(s).
+
+QUADRO DE NÍVEIS:
+  A01 Script / população do banco de dados: nível 4/4
+  A02 View vw_estoque: não entregue
+  A03 Diagrama Entidade-Relacionamento (DER): não entregue
+  A04 Listagem de valor total via view: não entregue
+  A05 Listagem de todos os produtos: nível 2/4
+  A06 Cadastro de novo produto: não entregue
+  A07 Listagem de saídas (ordem decrescente por data): não entregue
+  A08 Entrada de itens no estoque: não entregue
+  A09 Relatório de entradas/saídas por período: não entregue
+  A10 Produtos com maior volume de saída: não entregue
+  A11 Produtos nos limites mín/máx de estoque: não entregue
+
+📝 OBSERVAÇÕES (nota já atribuída):
+  A05: A listagem de produtos é realizada, mas com falhas de validação e tratamento de erros, além de não atender a todos os campos principais solicitados.

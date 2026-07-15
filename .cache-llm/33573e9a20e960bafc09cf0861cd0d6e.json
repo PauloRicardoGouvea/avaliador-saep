@@ -1,0 +1,1 @@
+{"nivel":4,"motivo":"A view vw_estoque calcula o valor total por item e retorna 5 colunas: valor total, identificador, valor unitário, quantidade e denominação.","revisar_humano":false,"bugs_execucao":["JOIN errado: id_produto = id_transacao, deve ser id_produto = id_produto"]}

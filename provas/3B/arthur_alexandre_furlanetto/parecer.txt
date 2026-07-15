@@ -1,0 +1,14 @@
+Arthur concluiu poucas funcionalidades no nível esperado dentro do tempo de prova. O script SQL não foi localizado ou não contém criação de tabelas. Nenhuma rota ou função foi identificada no backend.
+
+QUADRO DE NÍVEIS:
+  A01 Script / população do banco de dados: não entregue
+  A02 View vw_estoque: não entregue
+  A03 Diagrama Entidade-Relacionamento (DER): não entregue
+  A04 Listagem de valor total via view: não entregue
+  A05 Listagem de todos os produtos: não entregue
+  A06 Cadastro de novo produto: não entregue
+  A07 Listagem de saídas (ordem decrescente por data): não entregue
+  A08 Entrada de itens no estoque: não entregue
+  A09 Relatório de entradas/saídas por período: não entregue
+  A10 Produtos com maior volume de saída: não entregue
+  A11 Produtos nos limites mín/máx de estoque: não entregue

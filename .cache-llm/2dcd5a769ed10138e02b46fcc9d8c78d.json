@@ -1,0 +1,1 @@
+{"nivel":1,"motivo":"A view vv_estoque não calcula o valor total por item de produto, apenas retorna as colunas nome, categoria, quantidade e valor_unitario.","revisar_humano":false,"bugs_execucao":["SELECT sem multiplicação quantidade × valor unitário — cálculo do valor total ausente/errado"]}

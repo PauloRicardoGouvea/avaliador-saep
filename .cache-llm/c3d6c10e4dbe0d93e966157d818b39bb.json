@@ -1,0 +1,1 @@
+{"nivel":1,"motivo":"O script do banco de dados apresenta erros estruturais, como a VIEW vw_estoque com JOIN e WHERE inválidos.","revisar_humano":false,"bugs_execucao":["Erro de sintaxe na VIEW vw_estoque","JOIN e WHERE inválidos na VIEW vw_estoque"]}

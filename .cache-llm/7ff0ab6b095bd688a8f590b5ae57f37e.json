@@ -1,0 +1,1 @@
+{"nivel":3,"motivo":"O código registra a entrada e atualiza automaticamente as quantidades com base no saldo atual, integrando com o banco, porém a data não está no formato 25-12-2025.","revisar_humano":false,"bugs_execucao":[]}

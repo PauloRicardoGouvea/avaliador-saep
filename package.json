@@ -1,0 +1,23 @@
+{
+  "name": "saep-avaliador",
+  "version": "1.0.0",
+  "description": "Avaliador automático de provas práticas SAEP com Correção Generosa",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "avaliar": "node index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "adm-zip": "^0.6.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "git": "^0.1.5",
+    "multer": "^2.2.0",
+    "nodemon": "^3.1.14"
+  }
+}

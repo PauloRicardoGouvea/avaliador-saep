@@ -1,0 +1,1 @@
+{"nivel":1,"motivo":"A função de entrada de itens no estoque apresenta erros de lógica e estrutura que impedem o registro da entrada, como a falta de uma rota PUT /produto/:id que atualize corretamente o saldo e a data de entrada.","revisar_humano":true,"bugs_execucao":["A view vw_estoque está com erro de sintaxe","A rota PUT /produto/:id não atualiza o estoque"]}

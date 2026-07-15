@@ -1,0 +1,21 @@
+Jose demonstrou compreensão parcial do projeto, com implementações funcionais em parte das atividades. No banco, estruturou 2 tabela(s) (produto, estoque) com PKs e FKs definidas; criou view (vw_estoque). No backend, implementou 4 rota(s) (GET, POST) e 0 função(ões) nomeada(s).
+
+QUADRO DE NÍVEIS:
+  A01 Script / população do banco de dados: nível 4/4
+  A02 View vw_estoque: nível 4/4
+  A03 Diagrama Entidade-Relacionamento (DER): nível 3/4
+  A04 Listagem de valor total via view: não entregue
+  A05 Listagem de todos os produtos: nível 2/4
+  A06 Cadastro de novo produto: nível 3/4
+  A07 Listagem de saídas (ordem decrescente por data): nível 1/4
+  A08 Entrada de itens no estoque: nível 3/4
+  A09 Relatório de entradas/saídas por período: não entregue
+  A10 Produtos com maior volume de saída: não entregue
+  A11 Produtos nos limites mín/máx de estoque: não entregue
+
+🐞 BUGS QUE IMPEDEM A EXECUÇÃO:
+  A02: JOIN errado: id_produto = id_transacao, deve ser id_produto = id_produto
+
+📝 OBSERVAÇÕES (nota já atribuída):
+  A05: A entrega lista todos os produtos com no mínimo 3 campos principais (nome, quantidade em estoque e valor unitário), porém com falhas de validação, tratamento de erros ou padronização.
+  A07: A listagem de saídas está ordenada decrescentemente por data, mas a query utilizada não seleciona apenas as saídas e não há formatação de data.
