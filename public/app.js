@@ -10,10 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentGabarito = null;
     let currentStudentName = 'aluno';
 
+    // Backup UI Elements
     const exportBackupBtn = document.getElementById('exportBackupBtn');
     const importBackupBtn = document.getElementById('importBackupBtn');
     const backupFileInput = document.getElementById('backupFileInput');
 
+    // Tab navigation
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
@@ -33,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Turma filter buttons
     const filterBtns = document.querySelectorAll('.filter-btn');
     let currentFilter = 'all';
 
@@ -45,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Search input
     const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', () => {
         applyFilters();
@@ -82,15 +86,18 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = '';
         let totalStudents = 0;
 
+        // Sort turma keys for consistent order
         const turmaKeys = Object.keys(allStudentsData).sort();
 
         for (const turmaKey of turmaKeys) {
+            // Apply turma filter
             if (currentFilter !== 'all' && turmaKey.toUpperCase() !== currentFilter.toUpperCase()) {
                 continue;
             }
 
             let students = allStudentsData[turmaKey];
 
+            // Apply search filter
             if (searchTerm) {
                 students = students.filter(s => s.nome.toLowerCase().includes(searchTerm));
             }
@@ -129,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
 
+                // Re-evaluate button click
                 card.querySelector('.btn-reavaliar').addEventListener('click', () => {
                     reavaliarAluno(student.nome, student.turma);
                 });
@@ -148,29 +156,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function reavaliarAluno(nome, turma) {
+        // Switch to evaluation tab
         tabBtns.forEach(b => b.classList.remove('active'));
         tabContents.forEach(c => c.classList.remove('active'));
         
         document.querySelector('[data-tab="avaliar"]').classList.add('active');
         document.getElementById('tab-avaliar').classList.add('active');
 
+        // Show evaluation form, hide results
         resultsSection.classList.add('hidden');
         form.classList.remove('hidden');
 
+        // Pre-fill the form
         document.getElementById('nome').value = nome;
         document.getElementById('turma').value = turma;
 
+        // Reset file inputs display
         ['sql', 'js', 'der'].forEach(type => {
             document.getElementById(`name-${type}`).textContent = 'Nenhum arquivo selecionado';
             document.getElementById(`name-${type}`).style.color = 'var(--text-secondary)';
             document.getElementById(`zone-${type}`).style.borderColor = 'var(--panel-border)';
         });
 
+        // Update button text
         btnText.textContent = 'Atualizar e Reavaliar';
 
+        // Scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // File inputs visual feedback
     const fileInputs = ['sql', 'js', 'der'];
     
     fileInputs.forEach(type => {
@@ -190,6 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Drag and drop effects
         zone.addEventListener('dragover', (e) => {
             e.preventDefault();
             zone.classList.add('dragover');
@@ -209,9 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Form submission
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
+        // Show loading state
         submitBtn.disabled = true;
         btnText.classList.add('hidden');
         spinner.classList.remove('hidden');
@@ -234,9 +252,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             alert('Erro: ' + error.message);
         } finally {
+            // Hide loading state
             submitBtn.disabled = false;
             btnText.classList.remove('hidden');
             spinner.classList.add('hidden');
+            // Reset button text back to default
             btnText.textContent = 'Avaliar Projeto';
         }
     });
@@ -268,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('score-text').textContent = `${percent}%`;
         document.getElementById('score-path').setAttribute('stroke-dasharray', `${percent}, 100`);
         
+        // Color code the score
         const scorePath = document.getElementById('score-path');
         if (percent >= 80) scorePath.style.stroke = 'var(--success)';
         else if (percent >= 50) scorePath.style.stroke = 'var(--warning)';
@@ -294,6 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
         URL.revokeObjectURL(url);
     });
 
+    // Backup & Restore Logic
     exportBackupBtn.addEventListener('click', () => {
         window.location.href = '/api/backup';
     });
@@ -321,6 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (response.ok) {
                 alert('✅ Backup restaurado com sucesso!');
+                // Reload students if on the historico tab
                 if (document.querySelector('[data-tab="historico"]').classList.contains('active')) {
                     loadStudents();
                 }
@@ -333,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             importBackupBtn.textContent = '📥 Importar';
             importBackupBtn.disabled = false;
-            backupFileInput.value = ''; 
+            backupFileInput.value = ''; // Reset input
         }
     });
 });

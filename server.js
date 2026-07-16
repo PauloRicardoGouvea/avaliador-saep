@@ -17,9 +17,11 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
+// Set up multer to store files in memory temporarily
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+// Backup routes
 app.get('/api/backup', (req, res) => {
   try {
     const provasDir = path.join(__dirname, 'provas');
@@ -50,6 +52,8 @@ app.post('/api/restore', upload.single('backupZip'), (req, res) => {
     const zip = new AdmZip(req.file.buffer);
     const targetDir = path.join(__dirname);
     
+    // Extract everything. The zip should contain a "provas" folder at the root.
+    // If it overwrites existing students, adm-zip extractAllTo overwrites by default.
     zip.extractAllTo(targetDir, true);
     
     res.json({ success: true, message: 'Backup restaurado com sucesso!' });
@@ -59,6 +63,7 @@ app.post('/api/restore', upload.single('backupZip'), (req, res) => {
   }
 });
 
+// List all students grouped by turma
 app.get('/api/alunos', (req, res) => {
   try {
     const provasDir = path.join(__dirname, 'provas');
@@ -68,6 +73,7 @@ app.get('/api/alunos', (req, res) => {
 
     const turmas = {};
 
+    // Scan provas directory: provas/TURMA/NOME_ALUNO/
     for (const turmaEntry of fs.readdirSync(provasDir, { withFileTypes: true })) {
       if (!turmaEntry.isDirectory()) continue;
       const turmaName = turmaEntry.name;
@@ -98,13 +104,16 @@ app.get('/api/alunos', (req, res) => {
         let avaliado = false;
         if (fs.existsSync(gabaritoPath)) {
           avaliado = true;
+          // Try to extract percentage from the parecer file
           if (fs.existsSync(parecerPath)) {
             try {
               const parecerText = fs.readFileSync(parecerPath, 'utf-8');
+              // Percentage is logged by the engine
             } catch (_) {}
           }
         }
 
+        // List files in codigo/
         let arquivos = [];
         if (fs.existsSync(codigoPath)) {
           arquivos = fs.readdirSync(codigoPath).filter(f => !f.startsWith('.'));
@@ -120,6 +129,7 @@ app.get('/api/alunos', (req, res) => {
         });
       }
 
+      // Sort students by name
       turmas[turmaName].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
     }
 
@@ -144,6 +154,7 @@ app.post('/api/avaliar', upload.fields([
 
     const files = req.files || {};
 
+    // Create the folder structure: ./provas/TURMA/NOME_DO_ALUNO/codigo
     const folderTurma = turma.toUpperCase().replace(/\s+/g, '_');
     const folderNome = nome.toLowerCase().replace(/\s+/g, '_');
     const alunoDir = path.join(__dirname, 'provas', folderTurma, folderNome);
@@ -153,6 +164,7 @@ app.post('/api/avaliar', upload.fields([
       fs.mkdirSync(codigoDir, { recursive: true });
     }
 
+    // Save files
     const saveFile = (fileObj, filename) => {
       if (fileObj && fileObj[0]) {
         const filePath = path.join(codigoDir, filename);
@@ -164,8 +176,10 @@ app.post('/api/avaliar', upload.fields([
     if (files.jsFile) saveFile(files.jsFile, files.jsFile[0].originalname);
     if (files.derFile) saveFile(files.derFile, files.derFile[0].originalname);
 
+    // Save aluno.json
     fs.writeFileSync(path.join(alunoDir, 'aluno.json'), JSON.stringify({ nome, turma }, null, 2));
 
+    // Create a dummy gabarito.json if it doesn't exist
     const gabaritoPath = path.join(alunoDir, 'gabarito.json');
     if (!fs.existsSync(gabaritoPath)) {
       const templatePath = path.join(__dirname, 'template_gabarito.json');
@@ -176,6 +190,7 @@ app.post('/api/avaliar', upload.fields([
       }
     }
 
+    // Run the evaluation logic
     const result = await avaliarAluno(alunoDir);
 
     res.json({ success: true, result });

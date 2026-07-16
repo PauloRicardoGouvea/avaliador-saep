@@ -93,6 +93,9 @@ export function carregarAluno(pasta) {
 }
 
 function normalizarTurma(t) {
-  const m = String(t || "").toUpperCase().match(/3\s*([BC])/);
-  return m ? `3${m[1]}` : "N/D";
+  const valor = String(t || "").trim();
+  if (!valor) return "N/D";
+  // Formato clássico "3B"/"3 C" é normalizado; qualquer outro nome é aceito como está
+  const m = valor.toUpperCase().match(/^3\s*([A-Z])$/);
+  return m ? `3${m[1]}` : valor;
 }

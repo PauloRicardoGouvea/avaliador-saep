@@ -82,6 +82,45 @@ No final da execução, um arquivo `parecer.txt` será criado dentro da pasta de
 
 ---
 
+## 🚚 Pipeline completa — do zip do aluno à nota final
+
+Você não precisa mais montar pasta nenhuma. Jogue as entregas brutas
+(um `.zip` ou uma pasta por aluno) dentro de uma pasta qualquer, ex. `entregas/`:
+
+```
+entregas/
+  João da Silva.zip        ← zip do projeto (pode ter pasta raiz dentro)
+  Maria Souza/             ← ou pasta solta
+  pedro-almeida.zip
+```
+
+E rode **um comando**:
+
+```bash
+node index.js tudo ./entregas --turma=3B --auto
+```
+
+Ele faz, nessa ordem:
+1. **Extrai** cada zip/pasta para `provas/3B/<aluno>/codigo/` (ignora `node_modules`, `.git`, `__MACOSX`; achata pasta raiz única; nome do arquivo vira o nome do aluno);
+2. **Gera** `aluno.json` e um `gabarito.json` zerado a partir do `template_gabarito.json`;
+3. **Avalia** todos com a IA em paralelo;
+4. **Consolida**: `gabarito_avaliado.json` + `parecer.txt` por aluno, `dashboard.html` e `resultados.csv` da turma.
+
+É idempotente: rodar de novo **pula** quem já foi preparado/avaliado
+(novos zips na pasta são processados normalmente — perfeito para entregas
+que chegam aos poucos). Use `--refazer` para reavaliar.
+
+Etapas separadas, se preferir:
+```bash
+node index.js preparar ./entregas --turma=3B    # só monta a estrutura
+node index.js avaliar ./provas/3B --auto        # só corrige
+```
+
+Entrega vazia (zip corrompido/sem arquivos) aparece como erro no relatório
+de preparação e o aluno é avaliado como "não entregue" — nada trava o lote.
+
+---
+
 ## 🤖 Correção com IA (Groq) — recomendado para lote
 
 Sem chave, a ferramenta funciona só com análise estática (regex/AST): ela vê *estrutura*, mas não sabe se o código **rodaria**. Com a IA ligada, cada atividade é julgada contra o **texto oficial dos descritores 0–4** e bugs de execução (SQL inválido, tabela inexistente, coluna errada) são detectados e listados no parecer.

@@ -28,11 +28,13 @@
             </div>
         </header>
 
+        <!-- Navigation Tabs -->
         <nav class="tabs-nav">
             <button class="tab-btn active" data-tab="avaliar">📝 Nova Avaliação</button>
             <button class="tab-btn" data-tab="historico">👥 Histórico de Alunos</button>
         </nav>
 
+        <!-- Tab: Nova Avaliação -->
         <div id="tab-avaliar" class="tab-content active">
             <form id="evaluationForm" class="glass-panel">
                 <div class="form-group row">
@@ -47,6 +49,7 @@
                 </div>
 
                 <div class="upload-grid">
+                    <!-- SQL File -->
                     <div class="upload-zone" id="zone-sql">
                         <label for="sqlFile">
                             <div class="icon">💾</div>
@@ -56,6 +59,7 @@
                         <input type="file" id="sqlFile" name="sqlFile" accept=".sql">
                     </div>
 
+                    <!-- JS File -->
                     <div class="upload-zone" id="zone-js">
                         <label for="jsFile">
                             <div class="icon">💻</div>
@@ -65,6 +69,7 @@
                         <input type="file" id="jsFile" name="jsFile" accept=".js">
                     </div>
 
+                    <!-- DER File -->
                     <div class="upload-zone" id="zone-der">
                         <label for="derFile">
                             <div class="icon">🗺️</div>
@@ -123,6 +128,7 @@
             </section>
         </div>
 
+        <!-- Tab: Histórico de Alunos -->
         <div id="tab-historico" class="tab-content">
             <div class="glass-panel">
                 <div class="search-bar">

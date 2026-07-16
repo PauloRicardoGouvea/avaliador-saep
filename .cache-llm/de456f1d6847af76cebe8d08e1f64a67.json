@@ -1,1 +1,0 @@
-{"nivel":2,"notacao":"Chen","entidades":["produto","estoque"],"elementos_encontrados":["entidades","atributos","identificador com auto-incremento","chaves primárias"],"obs":"Falta de representação explícita das cardinalidades dos relacionamentos e de chaves estrangeiras.","revisar_humano":true}

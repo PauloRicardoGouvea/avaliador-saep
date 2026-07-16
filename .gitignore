@@ -1,3 +1,10 @@
 node_modules/
-
+.cache-llm/
 .env
+
+
+provas/3B/*
+provas/3C/*
+
+
+entregas/*

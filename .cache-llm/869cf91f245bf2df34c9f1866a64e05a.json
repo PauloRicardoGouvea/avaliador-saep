@@ -1,1 +1,0 @@
-{"nivel":1,"motivo":"A entrega apresenta erros de lógica e estrutura que impedem a execução da operação, como a tabela 'usuario' não existir no banco de dados e a consulta na rota GET /produtos retornar apenas 2 campos.","revisar_humano":false,"bugs_execucao":["Tabela 'usuario' não existe no banco de dados","Consulta na rota GET /produtos retornar apenas 2 campos"]}

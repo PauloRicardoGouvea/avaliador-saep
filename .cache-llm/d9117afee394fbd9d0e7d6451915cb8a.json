@@ -1,1 +1,0 @@
-{"nivel":2,"motivo":"O cadastro foi implementado conforme regras de negócio, mas falta validação de valor unitário, quantidade e denominação (que no caso é categoria), além de tratamento de erros.","revisar_humano":true,"bugs_execucao":[]}

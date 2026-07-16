@@ -1,1 +1,0 @@
-{"nivel":2,"motivo":"O aluno listou todos os produtos com os campos principais (nome, quantidade e valor unitário), mas não atendeu a todos os requisitos do nível 3, como incluir a unidade de medida, que não é um campo do cadastro no enunciado, e também não validou os dados.","revisar_humano":true,"bugs_execucao":["Erro de sintaxe na criação da view vw_estoque"]}

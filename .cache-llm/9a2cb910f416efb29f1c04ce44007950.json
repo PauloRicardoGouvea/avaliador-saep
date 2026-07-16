@@ -1,1 +1,0 @@
-{"nivel":2,"motivo":"A entrega lista todos os produtos com 4 campos principais (nome, categoria, quantidade e valor unitário), porém com falhas de validação e tratamento de erros.","revisar_humano":true,"bugs_execucao":["Erro de sintaxe no INSERT INTO produtos, parâmetro $3 está incorreto"]}

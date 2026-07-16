@@ -1,1 +1,0 @@
-{"nivel":3,"notacao":"Chen","entidades":["produto","estoque"],"elementos_encontrados":["entidades","atributos","identificador com auto-incremento","chaves estrangeiras","cardinalidade dos relacionamentos"],"obs":"Falta apenas a representação explícita das chaves primárias para atingir o nível 4.","revisar_humano":false}

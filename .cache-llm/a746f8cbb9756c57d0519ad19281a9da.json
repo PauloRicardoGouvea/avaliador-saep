@@ -1,1 +1,0 @@
-{"nivel":1,"motivo":"A view criada pelo aluno está com o nome 'vw_estoque2', mas a rota '/vw_estoque' está consultando 'vw_estoque', o que impede a execução correta.","revisar_humano":false,"bugs_execucao":["A view 'vw_estoque' não existe no banco de dados"]}
